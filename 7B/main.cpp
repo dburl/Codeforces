@@ -10,22 +10,18 @@ int main(){
 	long int t,m;
 	cin>> t>> m;
 	vector<string> res;
-	stringstream resout;
 
 	long int blockId=1;
 	vector<long int> mem(m,0);
 	
 	for (int i=0;i<t;++i){
-		//for (int z=0;z<m;++z){cout<<mem[z];}cout<<endl;
 		string command, tmp;
 		long int num =-1;
 		cin>>command;
 		if (command!="defragment")  {
 			cin >> num;
 		}
-		//cout << command << num<<endl;
 		if (command=="defragment"){
-			//cout << "in defrag"<< endl;
 			int a =0 , b=0;
 			while(b<mem.size()){
 				while(mem[a]!=0 && a<mem.size() ){++a;}
@@ -37,8 +33,6 @@ int main(){
 				}
 			}	
 		}
-		//
-		
 		if (command=="alloc"){
 			bool possAlloc=true;
 			for (int i=0;i<m;++i){
@@ -53,7 +47,6 @@ int main(){
 					for (int j=i;j<i+num;++j){		
 						mem[j]=blockId; 
 					}
-					resout<< blockId<<endl;
 					stringstream oss;
 					oss<<blockId;
 					res.push_back(oss.str());
@@ -63,20 +56,18 @@ int main(){
 			}
 			if (!possAlloc){
 				res.push_back("NULL");
-				resout<<"NULL"<<endl;
 			}
 		}
 		if (command=="erase"){
 			bool deleted=false;
 			for(long i=0;i<m;++i){
-				if (mem[i]==num){
+				if (mem[i]==num && num>0){
 					mem[i]=0;
 					deleted=true;
 				}
 			}
 			if (!deleted){
 				res.push_back("ILLEGAL_ERASE_ARGUMENT");
-				resout<<"ILLEGAL_ERASE_ARGUMENT";	
 			}
 		}
 	}
