@@ -7,7 +7,7 @@ using namespace std;
 
 double x, y;
 double n, vb, vs;
-vector<int> v;
+vector<double> v;
 
 double dist(int i){
 	return sqrt( (v[i]-x)*(v[i]-x)+y*y );
@@ -28,18 +28,22 @@ int main(){
 		v.push_back(tmp);
 	}
 	cin>> x>>y;
-	
+	byFoot.push_back(dist(0));
+
 	for (int i=1; i<n;++i){
 		double a=((double) v[i])/((double) vb);
 		double b=dist(i)/((double) vs);
 
 		byFoot.push_back(dist(i));
 
+
 		if (minTime<0||minTime> (a+b)){
 			minTime=a+b;
 			busMinTime=i;
 		} else if (minTime==(a+b)){
+			//cout<<"minTime==(a+b)"<<byFoot[busMinTime]<<endl;
 			if (dist(i)<byFoot[busMinTime]){
+				//cout<<"busMinTime=i;"<<i<<endl;
 				busMinTime=i;			
 			}
 		}
