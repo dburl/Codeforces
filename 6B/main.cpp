@@ -1,50 +1,35 @@
 #include <iostream>
 #include <vector>
+#include <map>
+#include <set>
 
 using namespace std;
 
-int tables(const vector<vector<char> >& vv, int a, int b, int i, int j){
-	int num=0;
-	if(i>0){ //check up
-		if (vv[i-1][j]!='.'){++num;}			
-		}
-	if (i<a-1){// check bott
-		if (vv[i+1][j]!='.'){++num;}	
-	}
-	
-	if (j<b-1){//check right
-		if (vv[i][j+1]!='.'){++num;}	
-	}
-	if (j>0){// jeck left
-		if (vv[i][j-1]!='.'){++num;}
-	}
-	return num;
-}
-
-
 int main(){
-	int a, b;
+	int n,m;
 	char c;
-	cin>> a>>b>>c;
-	vector<vector<char> > vv(a);
-	for (int i=0;i<a;++i){
-		string str;
-		cin>>str;
-		for (int j=0;j<b;++j){
-			vv[i].push_back(str[j]);	
-		}
+	cin>>n>>m>>c;
+	vector<string> v(n);
+	for(int i=0;i<n;++i){
+		cin>>v[i];
 	}
-	for (int i=0;i<a;++i){
-		for(int j=0;j<b;++j){
-			if(vv[i][j]==c){ //president
-				cout<< tables(vv,a,b,i,j)<< endl;
-				return 0;
-			}		
-		}
+	//cout<< "read"<<endl;
+	map<char, set<char> > x;
+	for (int i=0;i<n;++i){
+		for(int j=0;j<m;++j){
+			//cout<<i<<j<<endl;
+			if (v[i][j]!='.'){
+				if ((j+1)<m) x[v[i][j]].insert(v[i][j+1]);
+				if ((i+1)<n) x[v[i][j]].insert(v[i+1][j]);
+				if ((j-1)>=0) x[v[i][j]].insert(v[i][j-1]);
+				if ((i-1)>=0) x[v[i][j]].insert(v[i-1][j]);
+			}
+		}		
 	}
-	cout<<"0"<< endl;
+	x[c].erase(c);
+	x[c].erase('.');
+	cout<< x[c].size()<< endl;
 
 	return 0;
+
 }
-
-
