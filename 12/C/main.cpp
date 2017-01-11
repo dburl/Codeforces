@@ -51,7 +51,7 @@ int main(){
 	j=vP.size()-1;
 	for (int i=vN.size()-1;i>=0;--i){
 		maxim+= vN[i]*vP[j];
-		j--	
+		--j;	
 	}
 	cout<<minim<<" "<<maxim<<endl;
 
