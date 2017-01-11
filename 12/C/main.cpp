@@ -10,9 +10,9 @@ int main(){
 	int n,m;
 	cin>>n>>m;
 	vector<int> vP(n);
-	vector<string> vF(n);
+	vector<string> vF(m);
 	map<string, int> mF;
-	vector<int> vN(n);
+	vector<int> vN;
 
 	for (int i=0;i<n;++i){
 		cin>>vP[i];
@@ -33,23 +33,25 @@ int main(){
 	//
 	sort(vP.begin(),vP.end());
 	sort(vN.begin(),vN.end());
-	for (int i=0;i<vN.size();++i){
-		cout<<"vN[i]"<< vN[i]<< endl;
-	}	
-	for (int i=0;i<vP.size();++i){
-		cout<<"vP[i]"<< vP[i]<< endl;
-	}	
+	//for (int i=0;i<vN.size();++i){
+	//	cout<<"vN[i]"<< vN[i]<< endl;
+	//}	
+	//for (int i=0;i<vP.size();++i){
+	//	cout<<"vP[i]"<< vP[i]<< endl;
+	//}	
 	// minCalcul
 	long long minim=0;
 	int j=0;
 	for (int i=vN.size()-1;i>=0;--i){
-		minim+= vN[i]*vP[j++];	
+		minim+= vN[i]*vP[j];	
+		++j;
 	}
 	//maxCalcul	
 	long long maxim=0;
 	j=vP.size()-1;
 	for (int i=vN.size()-1;i>=0;--i){
-		minim+= vN[i]*vP[j--];	
+		maxim+= vN[i]*vP[j];
+		j--	
 	}
 	cout<<minim<<" "<<maxim<<endl;
 
