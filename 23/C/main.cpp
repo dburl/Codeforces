@@ -22,7 +22,7 @@ int main(){
 	for (long t=0;t<numTest;++t){
 		long N;
 		cin>>N;
-		vector<Box> bv(N);
+		vector<Box> bv(2*N-1);
 		long aTotal=0, oTotal=0;
 		for (long i=0;i<(2*N-1);++i){
 			long a, o;
@@ -31,31 +31,40 @@ int main(){
 			bv[i].a=a;bv[i].o=o;bv[i].id=i+1;
 		}
 		//
+		//cout<< aTotal<<" "<<oTotal<<endl;
 		sort(bv.begin(),bv.end(),decrA);
+		for (long i=0;i<(2*N-1);++i){
+			//cout<<"b'"<<bv[i].id<<"->"<< bv[i].a<<endl;		
+		}
 		set<set<long> > appBComb;
-		for (long i=0;i<(N-1);++i){
+		for (long i=0;i<(2*N-1);++i){
 			long appCollected=0;
 			set<long> tmp;
-			for (long j=i;j<i+N;++j){
+			for (long j=i;(j<i+N) && j<(2*N-1) ;++j){
 				appCollected+=bv[j].a;
 				tmp.insert(bv[j].id);
 			}
 			if (appCollected>=(aTotal/2)){
 				appBComb.insert(tmp);
+				//cout<<"app s"<<i<<" "<<i+N<<endl;
 			}
 		}
 		//
 		sort(bv.begin(),bv.end(),decrO);
+		for (long i=0;i<(2*N-1);++i){
+			//cout<<"b'"<<bv[i].id<<"->"<< bv[i].o<<endl;		
+		}
 		set<set<long> > orangBComb;
-		for (long i=0;i<(N-1);++i){
+		for (long i=0;i<(2*N-1);++i){
 			long orangCollected=0;
 			set<long> tmp;
-			for (long j=i;j<i+N;++j){
+			for (long j=i;(j<i+N)&& j<(2*N-1) ;++j){
 				orangCollected+=bv[j].o;
 				tmp.insert(bv[j].id);
 			}
 			if (orangCollected>=(oTotal/2)){
 				orangBComb.insert(tmp);
+				//cout<<"oran s"<<i<<" "<<i+N<<endl;
 			}
 		}
 		for (set<set<long> >::iterator it=appBComb.begin();it!=appBComb.end();++it){
