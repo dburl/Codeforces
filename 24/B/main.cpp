@@ -28,22 +28,19 @@ struct Pl{
 	vector<int> posNum;
 };
 
-bool pointComp(Pl a, Pl b){return a.point>b.point;}
+bool pointComp(Pl& a, Pl& b){return a.point>b.point;}
 
-vector<Pl> tie1(vector<Pl> v){
-	vector<Pl> tmp;
+int tie1(const vector<Pl>& v){
 	int p=v[0].point;
 	for(int i =0;i<v.size();++i){
-		if (v[i].point==p){
-			tmp.push_back(v[i]);
-		} else {
-			break;
+		if (v[i].point!=p){
+			return i-1;
 		}
 	}
-	return tmp;
+	return 0;
 }
 
-bool ordComp(Pl a, Pl b){
+bool ordComp(Pl& a, Pl& b){
 	for(int i=0;i<10;++i){
 		if (a.posNum[i]>b.posNum[i]){
 			return true;
@@ -52,22 +49,19 @@ bool ordComp(Pl a, Pl b){
 	return true;
 }
 //#2
-bool ordComp1(Pl a, Pl b){
+bool ordComp1(Pl& a, Pl& b){
 	return (a.posNum[0]>b.posNum[0]);
 }
-vector<Pl> tie2(vector<Pl> v){
-	vector<Pl> tmp;
+int tie2(vector<Pl>& v){
 	int p=v[0].posNum[0];
 	for(int i =0;i<v.size();++i){
-		if (v[i].posNum[0]==p){
-			tmp.push_back(v[i]);
-		} else {
-			break;
+		if (v[i].posNum[0]!=p){
+			return i-1;
 		}
 	}
-	return tmp;
+	return 0;
 }
-bool ordComp2(Pl a, Pl b){
+bool ordComp2(Pl& a, Pl&  b){
 	for(int i=1;i<10;++i){
 		if (a.posNum[i]>b.posNum[i]){
 			return true;
@@ -103,14 +97,14 @@ int main(){
 	}
 	// sort#1
 	sort(v.begin(),v.end(),pointComp);
-	vector<Pl> winners = tie1 (v);
-	sort(winners.begin(),winners.end(),ordComp);
-	cout<<winners[0].name<<endl;
+	int winners = tie1 (v);
+	sort(v.begin(),v.begin()+winners,ordComp);
+	cout<<v[0].name<<endl;
 	// sort#2
 	sort(v.begin(),v.end(),ordComp1);
 	winners = tie2(v);
-	sort(winners.begin(),winners.end(),ordComp2);
-	cout<<winners[0].name<<endl;
+	sort(v.begin(),v.begin()+winners,ordComp2);
+	cout<<v[0].name<<endl;
 
 	return 0;
 }
