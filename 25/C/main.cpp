@@ -1,5 +1,6 @@
 #include <iostream>
 #include<vector>
+#include <stack>
 
 using namespace std;
 
@@ -9,30 +10,27 @@ struct R{
 	int c;
 };
 
-void update (vector<vector<int> >& v, R r){
-	int row=r.a-1;//city a
-	int col=r.b-1;//city b
-	if (v[row][col]>r.c){
-		v[row][col]=r.c;
-		v[col][row]=r.c;
-	}
-	//vector<R> u;
-	for (int i=0;i<v.size();++i){
-		if (v[row][i]>(v[col][i]+v[row][col])){
-			v[row][i]=(v[col][i]+v[row][col]);
-			v[i][row]=(v[col][i]+v[row][col]);
-			R tmp={row+1, i+1,v[col][i]+v[row][col]};
-			update(v,tmp);
-			//u.push_back(tmp);
+void update (vector<vector<int> >& v, stack<R>& u){
+	if(u.empty()){ return;}
+		R r= u.top(); u.pop();
+		int row=r.a;//city a
+		int col=r.b;//city b
+		if (v[row][col]>r.c){
+			v[row][col]=r.c;
+			v[col][row]=r.c;
 		}
-		if (v[i][col]>(v[i][row]+v[row][col])){
-			v[i][col]=(v[i][row]+v[row][col]);
-			v[col][i]=(v[i][row]+v[row][col]);
-			R tmp={col+1, i+1,v[i][row]+v[row][col]};
-			update(v,tmp);
-			//u.push_back(tmp);
+	
+		for (int i=0;i<v.size();++i){
+			if (v[row][i]>(v[col][i]+v[row][col])){
+				R tmp={row, i,v[col][i]+v[row][col]};
+				u.push(tmp);
+			}
+			if (v[i][col]>(v[i][row]+v[row][col])){
+				R tmp={col, i,v[i][row]+v[row][col]};
+				u.push(tmp);
+			}
 		}
-	}
+		update(v,u);
 	
 }
 
@@ -59,13 +57,12 @@ int main(){
 	}
 	int k;
 	cin>>k;	
-	vector<R> nr(k);
 	for (int i=0;i<k;++i){
-		cin>>nr[i].a>>nr[i].b>>nr[i].c;
-	}
-	//
-	for (int i=0;i<k;++i){
-		update(v,nr[i]);
+		R r;
+		cin>>r.a>>r.b>>r.c;r.a-=1;r.b-=1;
+		stack<R> tmp;
+		tmp.push(r);
+		update(v,tmp);
 		cout<<dSum(v)<<" ";
 	}
 	cout<<endl;
