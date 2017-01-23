@@ -16,16 +16,24 @@ void update (vector<vector<int> >& v, R r){
 		v[row][col]=r.c;
 		v[col][row]=r.c;
 	}
+	//vector<R> u;
 	for (int i=0;i<v.size();++i){
 		if (v[row][i]>(v[col][i]+v[row][col])){
 			v[row][i]=(v[col][i]+v[row][col]);
 			v[i][row]=(v[col][i]+v[row][col]);
+			R tmp={row+1, i+1,v[col][i]+v[row][col]};
+			update(v,tmp);
+			//u.push_back(tmp);
 		}
 		if (v[i][col]>(v[i][row]+v[row][col])){
 			v[i][col]=(v[i][row]+v[row][col]);
 			v[col][i]=(v[i][row]+v[row][col]);
+			R tmp={col+1, i+1,v[i][row]+v[row][col]};
+			update(v,tmp);
+			//u.push_back(tmp);
 		}
 	}
+	
 }
 
 long dSum(vector<vector<int> >& v){
