@@ -19,6 +19,8 @@ int main(){
 				return 0;			
 			}
 			phase=1;
+			if (i==(s.size()-1)){cout<<"No solution"<<endl;
+				return 0;}
 			continue;
 		}
 		if (phase==1 && s[i]!='@'){
@@ -27,7 +29,10 @@ int main(){
 			start=i+1;
 			continue;
 		}
-	}	
+	}
+	if (phase==1){
+		s.substr(start,s.size()-start);
+	}
 	if (!all.empty()){
 	for (vector<string>::const_iterator it=all.begin();it!=all.end();++it){
 		cout<<*it;	
