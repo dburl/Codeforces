@@ -10,6 +10,7 @@ int main(){
 	// 
 	int phase=0;
 	int start=0;
+	int last=0;
 	vector<string> all;
 	for (int i=0; i<s.size(); ++i){
 		if (phase==0 && s[i]!='@'){continue;}
@@ -30,8 +31,11 @@ int main(){
 			continue;
 		}
 	}
-	if (phase==1){
-		s.substr(start,s.size()-start);
+	if (s.size()>=start){
+		string tmp=s.substr(start,s.size()-start+1);
+		for (int i = 0; i< tmp.size();++i){
+			all.back().push_back(tmp[i]);
+		}
 	}
 	if (!all.empty()){
 	for (vector<string>::const_iterator it=all.begin();it!=all.end();++it){
