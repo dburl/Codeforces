@@ -11,10 +11,10 @@ int main(){
 	int horSlack=(n-1)%s+1;
 	int verSlack=(m-1)%s+1;
 
-	int hCombin=horSlack*mHorJumps;
-	int vCombin=verSlack*mVerJumps;
+	long long hCombin=horSlack*mHorJumps;
+	long long vCombin=verSlack*mVerJumps;
 
-	int res= hCombin*vCombin;
+	long long res= hCombin*vCombin;
 
 	cout<<res<<endl;
 
