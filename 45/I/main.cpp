@@ -29,7 +29,12 @@ int main(){
 			need.push_back(v[i]);
 		}
 	}
-	if (need.empty()){need.push_back(v.front());}
+	if (need.empty()){
+		if (v.front()<0)
+			need.push_back(v.back());
+		else
+			need.push_back(v.front());
+	}
 		
 	for (int i=0;i<need.size();++i){
 		cout<<need[i]<<" ";
