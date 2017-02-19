@@ -21,7 +21,9 @@ int main(){
 		neg+=((v[i]<0)?1:0);
 		if (fstNeg<0 && v[i]<0){ fstNeg=i;}
 	}
-	sort(v.begin()+(fstNeg), v.end());
+	if (fstNeg>=0){
+		sort(v.begin()+fstNeg, v.end());
+	}
 	vector<int> need;
 	neg=neg%2;
 	for (int i=0;i<(n-neg);++i){
