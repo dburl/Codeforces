@@ -12,11 +12,9 @@ static bool isLetter(char c){
 }
 int main(){
 	string s;
-	cin>>s;
+	getline(cin,s);
 	for (int i=s.length()-1;i>=0;--i){
-		cout<<s[i]<<endl;
 		if (isLetter(s[i])){
-			cout<<s[i]<<endl;
 			cout<<((isVowel(s[i]))?"YES":"NO")<<endl;
 			return 0;
 		}
