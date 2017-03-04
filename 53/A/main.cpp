@@ -15,10 +15,15 @@ int main(){
 		cin>>v[i];
 	}
 	sort(v.begin(),v.end());
+	//	for(int i=0;i<n;++i){
+	//	cout<<v[i]<<" ";
+	//}
 	vector<string>::const_iterator it=lower_bound(v.begin(), v.end(), s);
+	//cout<<*it;
 	if (it!=v.end()&&
 		it->size()>=s.size()&&
-		it->substr(s.size())==s){
+		it->substr(0,s.size())==s){
+		//cout<<1<<endl;
 		cout<<*it<<endl;
 	} else{
 		cout<<s<<endl;
